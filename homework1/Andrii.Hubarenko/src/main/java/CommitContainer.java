@@ -25,6 +25,15 @@ public class CommitContainer implements ICommitContainer, Iterable{
         private Branch topBranch;
         private Commit previousCommit;
 
+        Commit(long id, String userName, String commitName, Branch topBranch, Commit previousCommit) {
+            this.id = id;
+            this.userName = userName;
+            this.commitName = commitName;
+            this.dateOfCommitting = new Date();
+            this.topBranch = topBranch;
+            this.previousCommit = previousCommit;
+        }
+
         public long getId() {
             return id;
         }
@@ -46,15 +55,6 @@ public class CommitContainer implements ICommitContainer, Iterable{
         }
 
         public void setPreviousCommit(Commit previousCommit) {
-            this.previousCommit = previousCommit;
-        }
-
-        Commit(long id, String userName, String commitName, Branch topBranch, Commit previousCommit) {
-            this.id = id;
-            this.userName = userName;
-            this.commitName = commitName;
-            this.dateOfCommitting = new Date();
-            this.topBranch = topBranch;
             this.previousCommit = previousCommit;
         }
 

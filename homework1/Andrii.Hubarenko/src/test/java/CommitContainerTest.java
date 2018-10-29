@@ -1,10 +1,11 @@
 import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class Test {
+public class CommitContainerTest {
 
-    @org.junit.Test
+    @Test
     public void test() {
         ICommitContainer cc = new CommitContainer("Andrii");
 
@@ -14,9 +15,11 @@ public class Test {
         Blob<String> file1 = new Blob<>("file 1", "Some content");
         Blob<Integer> file2 = new Blob<>("file 2", 124);
         Blob<Boolean> file3 = new Blob<>("file 3", true);
-
+        byte[]arr = {-128, -127, -2, 0, 100, 127};
+        Blob<byte[]> file4 = new Blob<>("file 4", arr);
         cc.addFileToBranch(file1);
         cc.addFileToBranch(file2);
+        cc.addFileToBranch(file4);
 
         cc.addSubBranch("Second branch");
         Assert.assertEquals("Second branch", cc.getSubBranch("Second branch").getName());
