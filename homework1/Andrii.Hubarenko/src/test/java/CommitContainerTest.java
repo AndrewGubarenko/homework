@@ -31,6 +31,7 @@ public class CommitContainerTest {
         Assert.assertEquals("Second branch", cc.getCurrentBranch().getName());
 
         cc.addFileToBranch(file3);
+        
         cc.getFile("file 3");
         Assert.assertEquals(file3, cc.getFile("file 3"));
 
