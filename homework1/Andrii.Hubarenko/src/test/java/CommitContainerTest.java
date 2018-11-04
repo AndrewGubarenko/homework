@@ -10,6 +10,7 @@ public class CommitContainerTest {
         ICommitContainer cc = new CommitContainer("Andrii");
 
         cc.init();
+        System.out.println(cc.getCurrentBranch().hashCode());
         Assert.assertEquals("Master", cc.getCurrentBranch().getName());
 
         Blob<String> file1 = new Blob<>("file 1", "Some content");
