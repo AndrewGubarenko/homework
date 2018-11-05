@@ -3,14 +3,15 @@
  * Class Branch uses to store the Blob files and another branches.
  */
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
 
 class Branch {
     private Branch parentBranch;
     private String name;
-    private ArrayList<Blob> listOfFiles;
-    private ArrayList<Branch> listOfBranches;
+    private List<Blob> listOfFiles;
+    private List<Branch> listOfBranches;
 
     Branch(String name) {
         this.name = name;
@@ -34,19 +35,19 @@ class Branch {
         this.name = name;
     }
 
-    public ArrayList<Blob> getListOfFiles() {
+    public List<Blob> getListOfFiles() {
         return listOfFiles;
     }
 
-    public void setListOfFiles(ArrayList<Blob> listOfFiles) {
+    public void setListOfFiles(List<Blob> listOfFiles) {
         this.listOfFiles = listOfFiles;
     }
 
-    public ArrayList<Branch> getListOfBranches() {
+    public List<Branch> getListOfBranches() {
         return listOfBranches;
     }
 
-    public void setListOfBranches(ArrayList<Branch> listOfBranches) {
+    public void setListOfBranches(List<Branch> listOfBranches) {
         this.listOfBranches = listOfBranches;
     }
 
