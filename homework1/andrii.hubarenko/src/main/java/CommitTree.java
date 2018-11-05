@@ -99,22 +99,6 @@ public class CommitTree implements Iterable{
     }
 
     /**
-     * Provide the access to current branch
-     * @return Branch which is current
-     */
-    public Branch getCurrentBranch() {
-        return currentBranch;
-    }
-
-    /**
-     * Allow the access to current commit value
-     * @return Commit current commit
-     */
-    public Commit getCurrentCommit() {
-        return currentCommit;
-    }
-
-    /**
      * Method initialize the work with the tree and create
      * the first branch named "Master"
      */
@@ -124,6 +108,14 @@ public class CommitTree implements Iterable{
         } else {
             System.out.println("Already initialized!");
         }
+    }
+
+    /**
+     * Provide the access to current branch
+     * @return Branch which is current
+     */
+    public Branch getCurrentBranch() {
+        return currentBranch;
     }
 
     /**
@@ -205,6 +197,14 @@ public class CommitTree implements Iterable{
         idCount++;
         currentCommit = new Commit(id, userName, commitName, currentBranch.clone(), currentCommit);
 
+    }
+
+    /**
+     * Allow the access to current commit value
+     * @return Commit current commit
+     */
+    public Commit getCurrentCommit() {
+        return currentCommit;
     }
 
     /**
