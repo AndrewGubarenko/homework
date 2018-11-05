@@ -5,7 +5,7 @@ import java.util.Objects;
  * Blob is a parameterized class for object storing inside the tree;
  * @param <E>
  */
-public class Blob<E>{
+class Blob<E>{
     private String name;
     private E content;
 

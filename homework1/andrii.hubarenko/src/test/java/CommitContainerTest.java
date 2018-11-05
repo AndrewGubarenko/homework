@@ -7,7 +7,7 @@ public class CommitContainerTest {
 
     @Test
     public void test() {
-        ICommitContainer cc = new CommitContainer("Andrii");
+        CommitTree cc = new CommitTree("Andrii");
 
         cc.init();
         System.out.println(cc.getCurrentBranch().hashCode());
