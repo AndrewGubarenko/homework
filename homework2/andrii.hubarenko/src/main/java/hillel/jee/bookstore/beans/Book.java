@@ -1,11 +1,32 @@
+package hillel.jee.bookstore.beans;
+
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 
 public class Book {
     private String author;
     private String bookName;
+    private int count;
 
     Book(String author, String bookName) {
         this.author = author;
+        this.bookName = bookName;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count += count;
+    }
+
+    public void setBookName(String bookName) {
         this.bookName = bookName;
     }
 
@@ -19,7 +40,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "hillel.bookstore.Book{" +
                 "author='" + author + '\'' +
                 ", bookName='" + bookName + '\'' +
                 '}';
