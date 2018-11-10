@@ -1,7 +1,5 @@
 package hillel.jee.bookstore.beans;
 
-import org.springframework.stereotype.Component;
-
 import java.util.Objects;
 
 public class Book {
@@ -9,14 +7,14 @@ public class Book {
     private String bookName;
     private int count;
 
-    Book(String author, String bookName) {
+    public Book(String author, String bookName) {
         this.author = author;
         this.bookName = bookName;
     }
 
-    public void setAuthor(String author) {
+/*    public void setAuthor(String author) {
         this.author = author;
-    }
+    }*/
 
     public int getCount() {
         return count;
@@ -26,9 +24,9 @@ public class Book {
         this.count += count;
     }
 
-    public void setBookName(String bookName) {
+/*    public void setBookName(String bookName) {
         this.bookName = bookName;
-    }
+    }*/
 
     public String getAuthor() {
         return author;

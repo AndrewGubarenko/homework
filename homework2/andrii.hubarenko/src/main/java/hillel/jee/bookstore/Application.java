@@ -6,9 +6,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Application {
-    public static void main(String[] args) {
-        ApplicationContext context = new ClassPathXmlApplicationContext("application-context");
 
+    public static void main(String[] args) {
+
+        ApplicationContext context = new ClassPathXmlApplicationContext("application-context");
         BookStore bookStore = context.getBean(BookStore.class);
         System.out.println("------------------------------------------------------");
         System.out.println(bookStore);
@@ -26,17 +27,17 @@ public class Application {
         bookStore.getListOfAuthors().forEach(System.out::println);
         System.out.println("------------------------------------------------------");
         bookStore.getListOfAuthorWorks("Edgar Allan Poe").forEach(System.out::println);
-        System.out.println(bookStore.getAmountOfBoofs("Edgar Allan Poe", "The Black Cat"));
-        System.out.println(bookStore.getAmountOfBoofs("Edgar Allan Poe", "The Golden Bug"));
-        System.out.println(bookStore.getAmountOfBoofs("William Shakespeare", "Richard, the Lion's Heart"));
+        System.out.println(bookStore.getAmountOfBooks("Edgar Allan Poe", "The Black Cat"));
+        System.out.println(bookStore.getAmountOfBooks("Edgar Allan Poe", "The Golden Bug"));
+        System.out.println(bookStore.getAmountOfBooks("William Shakespeare", "Richard, the Lion's Heart"));
         System.out.println("------------------------------------------------------");
         bookStore.wholeSaleBook("Edgar Allan Poe", "The Black Cat", 8);
-        System.out.println(bookStore.getAmountOfBoofs("Edgar Allan Poe", "The Black Cat"));
+        System.out.println(bookStore.getAmountOfBooks("Edgar Allan Poe", "The Black Cat"));
         System.out.println("------------------------------------------------------");
         bookStore.wholeSaleBook("Edgar Allan Poe", "The Black Cat", 8);
         System.out.println("------------------------------------------------------");
         bookStore.sellSingleBook("William Shakespeare", "Richard, the Lion's Heart");
-        System.out.println(bookStore.getAmountOfBoofs("William Shakespeare", "Richard, the Lion's Heart"));
+        System.out.println(bookStore.getAmountOfBooks("William Shakespeare", "Richard, the Lion's Heart"));
         bookStore.wholeSaleBook("William Shakespeare", "Hamlet", 1);
 
 

@@ -1,4 +1,4 @@
-package hillel.jee.bookstore.beans;
+package hillel.jee.bookstore.beans;;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ public class AuthorShelfOfWorks {
     private Map<String, Book> shelf;
     private String authorName;
 
-    public AuthorShelfOfWorks(String AuthorName) {
-        this.authorName = AuthorName;
+    public AuthorShelfOfWorks(String authorName) {
+        this.authorName = authorName;
         shelf = new HashMap<>();
     }
 
@@ -17,7 +17,7 @@ public class AuthorShelfOfWorks {
         return shelf;
     }
 
-    public void setShelf(Map<String, Book> shelf) {
+ /*   public void setShelf(Map<String, Book> shelf) {
         this.shelf = shelf;
     }
 
@@ -27,7 +27,7 @@ public class AuthorShelfOfWorks {
 
     public void setAuthorName(String authorName) {
         this.authorName = authorName;
-    }
+    }*/
 
     @Override
     public String toString() {

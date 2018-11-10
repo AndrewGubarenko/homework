@@ -1,23 +1,23 @@
 package hillel.jee.bookstore.beans;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import hillel.jee.bookstore.BookStoreConfiguration;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class BookStore {
-    ApplicationContext context = new ClassPathXmlApplicationContext("/Store-Context");
+
     Map<String, AuthorShelfOfWorks> bookStore;
 
-    BookStore() {
+    public BookStore() {
         bookStore = new HashMap<>();
     }
 
     private Book addNewBooks(Book book) {
         String author = book.getAuthor();
-        AuthorShelfOfWorks authorShelfOfWorks = context.getBean(AuthorShelfOfWorks.class, author);
+        BookStoreConfiguration context = new BookStoreConfiguration();
+        AuthorShelfOfWorks authorShelfOfWorks = context.authorShelfOfWorks(author);
         authorShelfOfWorks.getShelf().put(book.getBookName(), book);
         bookStore.put(author, authorShelfOfWorks);
         return book;
@@ -56,7 +56,7 @@ public class BookStore {
         return bookStore.get(authorName).getShelf().keySet();
     }
 
-    public int getAmountOfBoofs(String author, String bookName) {
+    public int getAmountOfBooks(String author, String bookName) {
         return findBook(author, bookName).getCount();
     }
 
