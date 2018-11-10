@@ -6,11 +6,14 @@
 
     <groupId>hillel.jee</groupId>
     <artifactId>AndriiHubarenko</artifactId>
+    <groupId>Hillel.jee</groupId>
+    <artifactId>AndriiGubarenko</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <developers>
         <developer>
             <id>AndriiHubarenko</id>
+            <id>AndriiGubarenko</id>
             <name>Andrii Hubarenko</name>
             <email>Andrewgubarenko@gmail.com</email>
             <roles>
