@@ -1,3 +1,4 @@
+/*
 package hillel.jee.bookstore;
 
 import hillel.jee.bookstore.beans.AuthorShelfOfWorks;
@@ -24,3 +25,4 @@ public class BookStoreConfiguration {
         return new Book(authorName, bookName);
     }
 }
+*/

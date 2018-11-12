@@ -10,4 +10,9 @@
         <constructor-arg ref="bookName"/>
     </bean>
 
+    <bean class="hillel.jee.bookstore.beans.Magazine" scope="prototype">
+        <constructor-arg ref="magazineName"/>
+        <constructor-arg ref="editionNumber"/>
+    </bean>
+
 </beans>
