@@ -26,7 +26,7 @@ public class BookStore {
      */
     private PrintEdition addNewEditions(PrintEdition edition) {
         String author = edition.getAuthor();
-        ApplicationContext context = new ClassPathXmlApplicationContext("/Store-context");
+        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/Store-context");
         AuthorShelfOfWorks authorShelfOfWorks = context.getBean(AuthorShelfOfWorks.class, author);
         authorShelfOfWorks.getShelf().put(edition.getEditionName(), edition);
         bookStore.put(author, authorShelfOfWorks);
@@ -106,20 +106,20 @@ public class BookStore {
     public PrintEdition sellSingleEdition(String author, String editionName) {
         PrintEdition authorWork = findEdition(author, editionName);
         if(authorWork != null && authorWork.getCount() != 0) {
-            return wholeSaleEdition(author, editionName, 1);
+            return wholeSaleBook(author, editionName, 1);
         }
         System.out.println("The book doesn't exist!");
         return null;
     }
 
     /**
-     * wholeSaleEdition is a method for selling a single edition, specified by author's name and edition name
+     * wholeSaleBook is a method for selling a single edition, specified by author's name and edition name
      * @param author author's name
      * @param editionName edition name
      * @param amountOfEditions amount of requested editions
      * @return PrintEdition sold edition
      */
-    public PrintEdition wholeSaleEdition(String author, String editionName, int amountOfEditions) {
+    public PrintEdition wholeSaleBook(String author, String editionName, int amountOfEditions) {
         PrintEdition authorWork = findEdition(author, editionName);
         if(authorWork == null) {
             System.out.println("The edition has been not found!");

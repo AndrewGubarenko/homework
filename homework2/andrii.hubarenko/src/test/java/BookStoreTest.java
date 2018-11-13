@@ -4,14 +4,21 @@ import hillel.jee.bookstore.beans.Magazine;
 import hillel.jee.bookstore.beans.PrintEdition;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration("classpath:/test-context.xml")
 public class BookStoreTest {
-    ApplicationContext context = new ClassPathXmlApplicationContext("application-context");
+
+    @Autowired
+    ApplicationContext context;
 
     @Test
     public void createStoreTest(){
@@ -168,15 +175,15 @@ public class BookStoreTest {
 
         Assert.assertEquals(10, bookStore.getAmountOfEditions("Edgar Allan Poe", "The Black Cat"));
 
-        bookStore.wholeSaleEdition("Edgar Allan Poe", "The Black Cat", 8);
+        bookStore.wholeSaleBook("Edgar Allan Poe", "The Black Cat", 8);
 
         Assert.assertEquals(2, bookStore.getAmountOfEditions("Edgar Allan Poe", "The Black Cat"));
 
-        bookStore.wholeSaleEdition("Edgar Allan Poe", "The Black Cat", 8);
+        bookStore.wholeSaleBook("Edgar Allan Poe", "The Black Cat", 8);
 
         Assert.assertEquals(100, bookStore.getAmountOfEditions("Men's Health", "3"));
 
-        bookStore.wholeSaleEdition("Men's Health", "3", 54);
+        bookStore.wholeSaleBook("Men's Health", "3", 54);
 
         Assert.assertEquals(46, bookStore.getAmountOfEditions("Men's Health", "3"));
     }
