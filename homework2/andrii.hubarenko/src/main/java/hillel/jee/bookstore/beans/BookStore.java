@@ -1,8 +1,5 @@
 package hillel.jee.bookstore.beans;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -13,24 +10,10 @@ import java.util.Set;
  */
 public class BookStore {
 
-    Map<String, AuthorShelfOfWorks> bookStore;
+    Map<String, AuthorShelfOfWorks> bookStore = new HashMap<>();
 
-    public BookStore() {
-        bookStore = new HashMap<>();
-    }
-
-    /**
-     * {@link PrintEdition} is a method using for adding a single edition to the storage
-     * @param edition you are going to add
-     * @return PrintEdition edition
-     */
-    private PrintEdition addNewEditions(PrintEdition edition) {
-        String author = edition.getAuthor();
-        ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/Store-context");
-        AuthorShelfOfWorks authorShelfOfWorks = context.getBean(AuthorShelfOfWorks.class, author);
-        authorShelfOfWorks.getShelf().put(edition.getEditionName(), edition);
-        bookStore.put(author, authorShelfOfWorks);
-        return edition;
+    public Map<String, AuthorShelfOfWorks> getBookStore() {
+        return bookStore;
     }
 
     /**
@@ -39,23 +22,28 @@ public class BookStore {
      * @param amountOfEditions is an amount of editions you are going to add
      * @return PrintEdition edition
      */
-    public PrintEdition addEditions(PrintEdition edition, int amountOfEditions) {
+    public PrintEdition addEditions(PrintEdition edition, AuthorShelfOfWorks authorShelfOfWorks, int amountOfEditions) {
         if(amountOfEditions <= 0) {
             System.out.println("Incorrect numbers of editions!");
             return null;
         }
-        String author = edition.getAuthor();
-        String editionName = edition.getEditionName();
-        AuthorShelfOfWorks authorShelfOfWorks = bookStore.get(author);
+        if(authorShelfOfWorks == null) {
+            System.out.println("authorShelfOfWorks is null!");
+            return null;
+        }
+        if(edition == null) {
+            System.out.println("edition is null!");
+            return null;
+        }
 
-        if(authorShelfOfWorks != null && authorShelfOfWorks.getShelf().get(editionName) != null) {
+        String editionName = edition.getEditionName();
+
+        if(authorShelfOfWorks.getShelf().get(editionName) != null) {
             authorShelfOfWorks.getShelf().get(editionName).setCount(amountOfEditions);
-        } else if (authorShelfOfWorks != null && authorShelfOfWorks.getShelf().get(editionName) == null) {
-            edition.setCount(amountOfEditions);
-            authorShelfOfWorks.getShelf().put(editionName, edition);
         } else {
             edition.setCount(amountOfEditions);
-            addNewEditions(edition);
+            authorShelfOfWorks.getShelf().put(editionName, edition);
+            bookStore.put(edition.getAuthor(), authorShelfOfWorks);
         }
         return edition;
     }
@@ -67,7 +55,13 @@ public class BookStore {
      * @return PrintEdition or null
      */
     public PrintEdition findEdition(String author, String editionName) {
-        return bookStore.get(author).getShelf().get(editionName);
+        if(bookStore.get(author) != null) {
+            if(bookStore.get(author).getShelf().get(editionName) != null) {
+                return bookStore.get(author).getShelf().get(editionName);
+            }
+            return null;
+        }
+        return null;
     }
 
     /**

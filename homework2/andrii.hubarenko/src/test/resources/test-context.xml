@@ -5,6 +5,11 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean class="hillel.jee.bookstore.beans.BookStore" scope="prototype"/>
+
+    <bean id="authorShelfOfWorks" class="hillel.jee.bookstore.beans.AuthorShelfOfWorks" scope="prototype">
+        <constructor-arg ref="authorName"/>
+    </bean>
+
     <bean class="hillel.jee.bookstore.beans.Book" scope="prototype">
         <constructor-arg ref="author"/>
         <constructor-arg ref="bookName"/>

@@ -1,7 +1,4 @@
-import hillel.jee.bookstore.beans.Book;
-import hillel.jee.bookstore.beans.BookStore;
-import hillel.jee.bookstore.beans.Magazine;
-import hillel.jee.bookstore.beans.PrintEdition;
+import hillel.jee.bookstore.beans.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +17,14 @@ public class BookStoreTest {
     @Autowired
     ApplicationContext context;
 
+    private AuthorShelfOfWorks checkAuthorShelf(String name, BookStore bookStore) {
+        AuthorShelfOfWorks authorShelfOfWorks = bookStore.getBookStore().get(name);
+        if(authorShelfOfWorks != null) {
+            return authorShelfOfWorks;
+        }
+        return context.getBean(AuthorShelfOfWorks.class, name);
+    }
+
     @Test
     public void createStoreTest(){
         BookStore bookStore = context.getBean(BookStore.class);
@@ -27,14 +32,12 @@ public class BookStoreTest {
 
     @Test
     public void createBookTest(){
-        PrintEdition book1 = context.getBean(Book.class,"Edgar Allan Poe", "The Black Cat");
-        PrintEdition book2 = context.getBean(Book.class,"Edgar Allan Poe", "The Golden Bug");
-        PrintEdition book3 = context.getBean(Book.class,"William Shakespeare", "Richard, the Lion's Heart");
+        PrintEdition book = context.getBean(Book.class,"Edgar Allan Poe", "The Black Cat");
     }
 
     @Test
     public void createMagazineTest(){
-        PrintEdition mag1 = context.getBean(Magazine.class,"Men's Health", 1);
+        PrintEdition mag = context.getBean(Magazine.class,"Men's Health", 1);
     }
 
     @Test
@@ -45,9 +48,9 @@ public class BookStoreTest {
         Magazine mag2 = context.getBean(Magazine.class,"Men's Health", 2);
         Magazine mag3 = context.getBean(Magazine.class,"Men's Health", 3);
 
-        bookStore.addEditions(mag1, 10);
-        bookStore.addEditions(mag2, 15);
-        bookStore.addEditions(mag3, 1);
+        bookStore.addEditions(mag1, checkAuthorShelf(mag1.getAuthor(), bookStore),10);
+        bookStore.addEditions(mag2, checkAuthorShelf(mag2.getAuthor(), bookStore),15);
+        bookStore.addEditions(mag3, checkAuthorShelf(mag3.getAuthor(), bookStore),1);
     }
 
     @Test
@@ -58,9 +61,9 @@ public class BookStoreTest {
         Book book2 = context.getBean(Book.class,"Edgar Allan Poe", "The Golden Bug");
         Book book3 = context.getBean(Book.class,"William Shakespeare", "Richard, the Lion's Heart");
 
-        bookStore.addEditions(book1, 10);
-        bookStore.addEditions(book2, 15);
-        bookStore.addEditions(book3, 1);
+        bookStore.addEditions(book1, checkAuthorShelf(book1.getAuthor(), bookStore),10);
+        bookStore.addEditions(book2, checkAuthorShelf(book2.getAuthor(), bookStore),15);
+        bookStore.addEditions(book3, checkAuthorShelf(book3.getAuthor(), bookStore),1);
     }
 
     @Test
@@ -74,12 +77,12 @@ public class BookStoreTest {
         Magazine mag2 = context.getBean(Magazine.class,"Men's Health", 2);
         Magazine mag3 = context.getBean(Magazine.class,"Men's Health", 3);
 
-        bookStore.addEditions(mag1, 100);
-        bookStore.addEditions(mag2, 150);
-        bookStore.addEditions(mag3, 10);
-        bookStore.addEditions(book1, 10);
-        bookStore.addEditions(book2, 15);
-        bookStore.addEditions(book3, 1);
+        bookStore.addEditions(mag1, checkAuthorShelf(mag1.getAuthor(), bookStore),100);
+        bookStore.addEditions(mag2, checkAuthorShelf(mag2.getAuthor(), bookStore),150);
+        bookStore.addEditions(mag3, checkAuthorShelf(mag3.getAuthor(), bookStore),10);
+        bookStore.addEditions(book1, checkAuthorShelf(book1.getAuthor(), bookStore),10);
+        bookStore.addEditions(book2, checkAuthorShelf(book2.getAuthor(), bookStore),15);
+        bookStore.addEditions(book3, checkAuthorShelf(book3.getAuthor(), bookStore),1);
 
         List<String> expected = new ArrayList<>();
         expected.add("Men's Health");
@@ -100,8 +103,8 @@ public class BookStoreTest {
         Book book1 = context.getBean(Book.class,"Edgar Allan Poe", "The Black Cat");
         Book book2 = context.getBean(Book.class,"Edgar Allan Poe", "The Golden Bug");
 
-        bookStore.addEditions(book1, 10);
-        bookStore.addEditions(book2, 15);
+        bookStore.addEditions(book1, checkAuthorShelf(book1.getAuthor(), bookStore),10);
+        bookStore.addEditions(book2, checkAuthorShelf(book2.getAuthor(), bookStore),15);
 
         List<String> expected = new ArrayList<>();
         expected.add("The Golden Bug");
@@ -122,9 +125,9 @@ public class BookStoreTest {
         Magazine mag2 = context.getBean(Magazine.class,"Men's Health", 2);
         Magazine mag3 = context.getBean(Magazine.class,"Men's Health", 3);
 
-        bookStore.addEditions(mag1, 100);
-        bookStore.addEditions(mag2, 150);
-        bookStore.addEditions(mag3, 10);
+        bookStore.addEditions(mag1, checkAuthorShelf(mag1.getAuthor(), bookStore),100);
+        bookStore.addEditions(mag2, checkAuthorShelf(mag2.getAuthor(), bookStore),150);
+        bookStore.addEditions(mag3, checkAuthorShelf(mag3.getAuthor(), bookStore),10);
 
         List<String> expected = new ArrayList<>();
         expected.add("1");
@@ -147,10 +150,10 @@ public class BookStoreTest {
         Book book3 = context.getBean(Book.class,"William Shakespeare", "Richard, the Lion's Heart");
         Magazine mag1 = context.getBean(Magazine.class,"Men's Health", 3);
 
-        bookStore.addEditions(book1, 10);
-        bookStore.addEditions(book2, 15);
-        bookStore.addEditions(book3, 1);
-        bookStore.addEditions(mag1, 100);
+        bookStore.addEditions(book1, checkAuthorShelf(book1.getAuthor(), bookStore),10);
+        bookStore.addEditions(book2, checkAuthorShelf(book2.getAuthor(), bookStore),15);
+        bookStore.addEditions(book3, checkAuthorShelf(book3.getAuthor(), bookStore),1);
+        bookStore.addEditions(mag1, checkAuthorShelf(mag1.getAuthor(), bookStore),100);
 
 
         Assert.assertEquals(10, bookStore.getAmountOfEditions("Edgar Allan Poe", "The Black Cat"));
@@ -168,10 +171,10 @@ public class BookStoreTest {
         Book book3 = context.getBean(Book.class,"William Shakespeare", "Richard, the Lion's Heart");
         Magazine mag1 = context.getBean(Magazine.class,"Men's Health", 3);
 
-        bookStore.addEditions(book1, 10);
-        bookStore.addEditions(book2, 15);
-        bookStore.addEditions(book3, 1);
-        bookStore.addEditions(mag1, 100);
+        bookStore.addEditions(book1, checkAuthorShelf(book1.getAuthor(), bookStore),10);
+        bookStore.addEditions(book2, checkAuthorShelf(book2.getAuthor(), bookStore),15);
+        bookStore.addEditions(book3, checkAuthorShelf(book3.getAuthor(), bookStore),1);
+        bookStore.addEditions(mag1, checkAuthorShelf(mag1.getAuthor(), bookStore),100);
 
         Assert.assertEquals(10, bookStore.getAmountOfEditions("Edgar Allan Poe", "The Black Cat"));
 
@@ -194,7 +197,7 @@ public class BookStoreTest {
 
         Book book3 = context.getBean(Book.class,"William Shakespeare", "Richard, the Lion's Heart");
 
-        bookStore.addEditions(book3, 1);
+        bookStore.addEditions(book3, checkAuthorShelf(book3.getAuthor(), bookStore),1);
         Assert.assertEquals(1, bookStore.getAmountOfEditions("William Shakespeare", "Richard, the Lion's Heart"));
 
         bookStore.sellSingleEdition("William Shakespeare", "Richard, the Lion's Heart");

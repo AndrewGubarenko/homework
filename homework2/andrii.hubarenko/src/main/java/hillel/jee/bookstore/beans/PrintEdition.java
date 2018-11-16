@@ -8,7 +8,6 @@ import java.util.Objects;
 public class PrintEdition {
     private String author;
     private String editionName;
-    private String editionType;
     private long price;
     private int count;
 

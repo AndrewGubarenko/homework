@@ -8,12 +8,11 @@ import java.util.Objects;
  * {@link AuthorShelfOfWorks} is a container for storing of many print editions of one author
  */
 public class AuthorShelfOfWorks {
-    private Map<String, PrintEdition> shelf;
+    private Map<String, PrintEdition> shelf = new HashMap<>();
     private String authorName;
 
     public AuthorShelfOfWorks(String authorName) {
         this.authorName = authorName;
-        shelf = new HashMap<>();
     }
 
     public Map<String, PrintEdition> getShelf() {
