@@ -5,4 +5,5 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
     <bean id="navigationBar" class="NavigationBar" />
     <bean class="LocalizedNavigationBarBeanPostProcessor" />
+
 </beans>
