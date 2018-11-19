@@ -1,5 +1,9 @@
 import java.util.Objects;
 
+/**
+ * Imitation of Navigation Bar to demonstrate localizing
+ * annotated String fields by Bean Post Processor
+ */
 public class NavigationBar {
 
     @LocalizedString(key = "navigationBar.item.file")
