@@ -14,6 +14,6 @@ public class ShellInterface{
     public double count (String a) {
 
 
-        return proccessor.disassemble(a);
+        return proccessor.stringProcessing(a);
     }
 }
