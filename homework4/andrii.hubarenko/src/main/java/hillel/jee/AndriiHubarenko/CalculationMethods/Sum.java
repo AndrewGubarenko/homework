@@ -2,16 +2,14 @@ package hillel.jee.AndriiHubarenko.CalculationMethods;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Class {@link Sum} is using for calculation the sum of two digits.
+ * Implements the {@link Calculation} interface.
+ */
 @Component
-public class Sum {
+public class Sum implements Calculation {
 
-    private final int priority = 1;
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public double sum(double a, double b) {
+    public double calc(double a, double b) {
         return a + b;
     }
 }

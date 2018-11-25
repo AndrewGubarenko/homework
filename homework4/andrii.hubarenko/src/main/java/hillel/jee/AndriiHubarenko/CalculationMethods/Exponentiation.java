@@ -2,16 +2,14 @@ package hillel.jee.AndriiHubarenko.CalculationMethods;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Class {@link Exponentiation} is using for calculation the exponent of digit "a" to a power "b".
+ * Implements the {@link Calculation} interface.
+ */
 @Component
-public class Exponentiation {
+public class Exponentiation implements Calculation {
 
-    private final int priority = 3;
-
-    public int getPriority() {
-        return priority;
-    }
-
-    public double exponentiation(double a, double b) {
+    public double calc(double a, double b) {
         return Math.pow(a, b);
     }
 }

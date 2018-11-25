@@ -6,6 +6,9 @@ import org.springframework.core.annotation.Order;
 import org.springframework.shell.jline.PromptProvider;
 import org.springframework.stereotype.Component;
 
+/**
+ * The class {@link SimpleBannerProvider} is used for printing a cool banner
+ */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class SimpleBannerProvider implements PromptProvider {
