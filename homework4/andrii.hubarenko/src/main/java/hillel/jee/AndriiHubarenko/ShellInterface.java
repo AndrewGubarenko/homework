@@ -14,7 +14,7 @@ public class ShellInterface{
     @Autowired
     Processor processor;
 
-    @ShellMethod("Sum of two integers")
+    @ShellMethod("Calculator")
     public double count (String a) {
         return processor.perform(a);
     }
