@@ -14,17 +14,7 @@ import java.util.List;
 public class Processor {
 
     @Autowired
-    Calculation sum;
-    @Autowired
-    Calculation subtraction;
-    @Autowired
-    Calculation multiplication;
-    @Autowired
-    Calculation division;
-    @Autowired
-    Calculation exponentiation;
-    @Autowired
-    Calculation root;
+    CalculationMethods methods;
 
     /**
      * The method is using for transformation all digits (int and double),
@@ -117,10 +107,10 @@ public class Processor {
         List result = new ArrayList();
         for(int i = 0, j = 0; i < list.size(); i++) {
             if(list.get(i).equals("^")) {
-                result.set(j-1, exponentiation.calc((double) result.get(j-1), (double) list.get(i+1)));
+                result.set(j-1, ((Exponentiation) methods.getMap().get("exponentiation")).calc((double) result.get(j-1), (double) list.get(i+1)));
                 i++;
             } else if(list.get(i).equals("root")) {
-                result.set(j-1, root.calc((double) result.get(j-1), (double) list.get(i+1)));
+                result.set(j-1, ((Root) methods.getMap().get("root")).calc((double) result.get(j-1), (double) list.get(i+1)));
                 i++;
             } else {
                 result.add(list.get(i));
@@ -139,10 +129,10 @@ public class Processor {
         List result = new ArrayList();
         for(int i = 0, j = 0; i < list.size(); i++) {
             if(list.get(i).equals("*")) {
-                result.set(j-1, multiplication.calc((double) result.get(j-1), (double) list.get(i+1)));
+                result.set(j-1, ((Multiplication) methods.getMap().get("multiplication")).calc((double) result.get(j-1), (double) list.get(i+1)));
                 i++;
             } else if(list.get(i).equals("/")) {
-                result.set(j-1, division.calc((double) result.get(j-1), (double) list.get(i+1)));
+                result.set(j-1, ((Division) methods.getMap().get("division")).calc((double) result.get(j-1), (double) list.get(i+1)));
                 i++;
             } else {
                 result.add(list.get(i));
@@ -163,9 +153,9 @@ public class Processor {
         if(list.size() > 2) {
             for(int i = 1; i < list.size(); i++) {
                 if(list.get(i).equals("+")) {
-                    result = sum.calc(result, (double) list.get(i+1));
+                    result = ((Sum) methods.getMap().get("sum")).calc(result, (double) list.get(i+1));
                 } else if(list.get(i).equals("-")) {
-                    result = subtraction.calc(result, (double) list.get(i+1));
+                    result = ((Subtraction) methods.getMap().get("subtraction")).calc(result, (double) list.get(i+1));
                 }
             }
         }

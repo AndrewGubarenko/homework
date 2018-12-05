@@ -15,7 +15,7 @@ public class ShellInterface{
     Processor processor;
 
     @ShellMethod("Calculator")
-    public double count (String a) {
-        return processor.perform(a);
+    public double count (String str) {
+        return processor.perform(str);
     }
 }
