@@ -44,11 +44,11 @@ public abstract class Pet {
         this.color = color;
     }
 
-    public void feed(Food food) {
+    public String feed(Food food) {
         if(food.getFoodFor().equals(this.getSpecies())) {
-            System.out.println("OM-NOM-NOM");
+            return "OM-NOM-NOM";
         } else {
-            System.out.println("This kind of ood is not suitable for " + this.getClass().getSimpleName());
+            return "This kind of ood is not suitable for " + this.getClass().getSimpleName();
         }
     }
 

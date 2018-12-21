@@ -12,12 +12,12 @@ import java.util.*;
 @Scope("singleton")
 public class PetStorage {
 
-    private Map<String, List<Pet>> storage = new HashMap<>();
+    private Map<String, Set<Pet>> storage = new HashMap<>();
     @Autowired
     private PetCreator creator;
 
     private void storageFiller() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 3; i++) {
             Random random = new Random();
             switch (random.nextInt(8)) {
                 case 0:
@@ -49,19 +49,43 @@ public class PetStorage {
     }
 
     public void addPetToStore(Pet pet) {
-        List<Pet> value = storage.get(pet.getClass().getSimpleName());
+        Set<Pet> value = storage.get(pet.getClass().getSimpleName());
         if(value != null) {
             value.add(pet);
         } else {
-            List<Pet> result = new ArrayList<>();
+            Set<Pet> result = new HashSet<>();
             result.add(pet);
             storage.put(pet.getClass().getSimpleName(), result);
         }
     }
 
-    public Map<String, List<Pet>> getStorage() {
+    public Map<String, Set<Pet>> getStorage() {
         this.storageFiller();
         return storage;
     }
 
+    public Pet getPet(String type, String name) {
+        String comparableType = type.toLowerCase();
+        switch (comparableType) {
+            case "cat": return creator.getCat(name);
+            case "dog": return creator.getDog(name);
+            case "goldfish":return creator.getGoldFish(name);
+            case "hamster":return creator.getHamster(name);
+            case "parrot":return creator.getParrot(name);
+            case "rabbit":return creator.getRabbit(name);
+            case "tarantula":return creator.getTarantula(name);
+            case "worm":return creator.getWorm(name);
+        }
+        return null;
+    }
+
+    public Pet findPetByTypeAndName(String type, String name) {
+        Set<Pet> petSet = storage.get(type);
+        for(Pet pet: petSet) {
+            if(pet.getName().equals(name)) {
+                return pet;
+            }
+        }
+        return null;
+    }
 }

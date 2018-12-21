@@ -4,7 +4,7 @@ import hillel.jee.pets.Species;
 import org.springframework.stereotype.Component;
 
 @Component
-public abstract class Food {
+public class Food {
     Species foodFor;
 
     public Species getFoodFor() {
