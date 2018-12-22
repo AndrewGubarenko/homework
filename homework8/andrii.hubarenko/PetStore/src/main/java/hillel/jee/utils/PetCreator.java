@@ -5,6 +5,9 @@ import hillel.jee.pets.Species;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * The class contains getters with and without arguments(name of pet) to get an exact pet
+ */
 @Component
 public class PetCreator {
 

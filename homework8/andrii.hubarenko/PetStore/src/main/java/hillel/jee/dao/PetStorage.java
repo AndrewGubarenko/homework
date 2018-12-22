@@ -8,6 +8,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * Simple implementing of Data Base for Pets storing
+ */
 @Component
 @Scope("singleton")
 public class PetStorage {
@@ -16,6 +19,9 @@ public class PetStorage {
     @Autowired
     private PetCreator creator;
 
+    /**
+     * The method provides random filling of storage by Pets
+     */
     private void storageFiller() {
         for (int i = 0; i < 3; i++) {
             Random random = new Random();
@@ -48,6 +54,10 @@ public class PetStorage {
         }
     }
 
+    /**
+     * The method just puts a single Pet to store
+     * @param pet
+     */
     public void addPetToStore(Pet pet) {
         Set<Pet> value = storage.get(pet.getClass().getSimpleName());
         if(value != null) {
@@ -59,12 +69,22 @@ public class PetStorage {
         }
     }
 
+    /**
+     * Getter for storage
+     * @return storage
+     */
     public Map<String, Set<Pet>> getStorage() {
         this.storageFiller();
         return storage;
     }
 
-    public Pet getPet(String type, String name) {
+    /**
+     * The method creates a new Pet
+     * @param type
+     * @param name
+     * @return pet
+     */
+    public Pet createPet(String type, String name) {
         String comparableType = type.toLowerCase();
         switch (comparableType) {
             case "cat": return creator.getCat(name);
@@ -79,6 +99,12 @@ public class PetStorage {
         return null;
     }
 
+    /**
+     * The method is for searching the Pet in the Storage by the type of Pet and it's name
+     * @param type
+     * @param name
+     * @return
+     */
     public Pet findPetByTypeAndName(String type, String name) {
         Set<Pet> petSet = storage.get(type);
         for(Pet pet: petSet) {

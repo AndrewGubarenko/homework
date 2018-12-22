@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+/**
+ * An abstract parent class for all Pets
+ */
 @Component
 public abstract class Pet {
     private String name;
@@ -44,6 +47,11 @@ public abstract class Pet {
         this.color = color;
     }
 
+    /**
+     * The method for feeding the Pet, just check wether the Food is acceptable for Pet or not.
+     * @param food
+     * @return String
+     */
     public String feed(Food food) {
         if(food.getFoodFor().equals(this.getSpecies())) {
             return "OM-NOM-NOM";
@@ -52,6 +60,10 @@ public abstract class Pet {
         }
     }
 
+    /**
+     * An abstract method that should be individual for each type of Pets.
+     * Should return the Pet's voice.
+     */
     public abstract void voice();
 
     @Override

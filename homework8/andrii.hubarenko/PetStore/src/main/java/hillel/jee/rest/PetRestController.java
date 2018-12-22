@@ -23,7 +23,7 @@ public class PetRestController {
 
     @PostMapping(path = "/newPet/", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Pet createPet(@RequestParam String type, @RequestParam String name) {
-        Pet pet = storage.getPet(type, name);
+        Pet pet = storage.createPet(type, name);
         storage.addPetToStore(pet);
         return pet;
     }
